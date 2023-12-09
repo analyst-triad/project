@@ -51,4 +51,7 @@ jobs:
       env:
         GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
       run: |
+        dvc add sensor_data.csv
+        git add .
+        git commit -m "DVC commit for data file"
         dvc push
