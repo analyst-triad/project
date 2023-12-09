@@ -53,7 +53,6 @@ jobs:
       run: |
         dvc add sensor_data.csv
         git add .
-        git add sensor_data.csv.dvc
         git commit -m "DVC commit for data file"
         git push
         dvc push
