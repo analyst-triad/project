@@ -2,9 +2,12 @@ import pandas as pd
 from datetime import datetime, timedelta
 import subprocess
 import numpy as np
+import dvc.api
 
 # Set seed for reproducibility
 np.random.seed(42)
+
+REMOTE_URL = 'gdrive://1v0x1hF9Ta4TYldCm5qDLhWmlCD4zYwzW/sensor_data.csv'
 
 # Function to generate dummy data and append to existing CSV
 def generate_and_append_data(file_path, num_machines=5, num_sensors=3, freq='H'):
@@ -23,6 +26,10 @@ def generate_and_append_data(file_path, num_machines=5, num_sensors=3, freq='H')
 
     new_data = generate_dummy_data(start_date, end_date, num_machines, num_sensors, freq)
     updated_data = pd.concat([existing_data, new_data], ignore_index=True)
+    
+    # Save updated data using DVC
+    with dvc.api.open_url(REMOTE_URL, 'w') as fd:
+        updated_data.to_csv(fd, index=False)
 
     updated_data.to_csv(file_path, index=False)
 
