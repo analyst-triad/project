@@ -1,0 +1,28 @@
+name: Data Generation
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Run every 12 hours
+
+jobs:
+  generate_data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9  # Change to 3.9
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run data generation script
+      run: |
+        python append_data.py
+      env:
+        DATA_FILE_PATH: sensor_data.csv  # Adjust the filename as needed
