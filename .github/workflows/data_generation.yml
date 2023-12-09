@@ -28,4 +28,17 @@ jobs:
       run: |
         python append_data.py
       env:
-        DATA_FILE_PATH: sensor_data.csv  # Adjust the filename as needed
+        DATA_FILE_PATH: sensor_data.csv
+
+    - name: Set up DVC
+      run: |
+        pip install dvc
+        dvc init
+        dvc remote add -d myremote gdrive://1v0x1hF9Ta4TYldCm5qDLhWmlCD4zYwzW
+
+    - name: DVC Add and Commit
+      run: |
+        dvc add data/sensor_data.csv
+        git add data/sensor_data.csv.dvc
+        git commit -m "DVC commit for data file"
+        dvc push
