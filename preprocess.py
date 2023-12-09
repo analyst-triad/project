@@ -24,20 +24,4 @@ data['Sensor_ID'] = le_sensor.fit_transform(data['Sensor_ID'])
 scaler = StandardScaler()
 data[['Hour', 'Machine_ID', 'Sensor_ID', 'Reading']] = scaler.fit_transform(data[['Hour', 'Machine_ID', 'Sensor_ID', 'Reading']])
 
-# Define features (X) and target variable (y)
-X = data[['Hour', 'Machine_ID', 'Sensor_ID']]
-y = data['Reading']
-
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
-
-# Initialize and train the RandomForestRegressor model
-rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
-rf_model.fit(X_train, y_train)
-
-# Make predictions on the test set
-predictions = rf_model.predict(X_test)
-
-# Calculate Mean Squared Error (MSE) as a measure of model performance
-mse = mean_squared_error(y_test, predictions)
-print(f'Mean Squared Error: {mse}')
+data.to_csv("preprocess_data.csv")
