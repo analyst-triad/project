@@ -55,7 +55,7 @@ def generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3, fre
 
 
 if __name__ == "__main__":
-    data_file_path = 'dummy_sensor_data.csv'
+    data_file_path = 'sensor_data.csv'
     # Define date range for dummy data
     start_date = datetime(2023, 1, 1)
     end_date = datetime(2023, 1, 10)
@@ -64,4 +64,4 @@ if __name__ == "__main__":
     dummy_data = generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3)
 
     # Save dummy data to CSV file
-    dummy_data.to_csv('dummy_sensor_data.csv', index=False)
+    dummy_data.to_csv('sensor_data.csv', index=False)
