@@ -43,7 +43,7 @@ jobs:
 
     - name: DVC Add and Commit
       run: |
-        git add sensor_data.csv.dvc
+        git add .
         git commit -m "DVC commit for data file"
 
     - uses: iterative/setup-dvc@v1
