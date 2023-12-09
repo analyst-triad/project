@@ -33,8 +33,6 @@ jobs:
     - name: Set up DVC
       run: |
         pip install dvc
-        dvc init
-        dvc remote add -d myremote gdrive://1v0x1hF9Ta4TYldCm5qDLhWmlCD4zYwzW
 
     - name: DVC Add and Commit
       run: |
