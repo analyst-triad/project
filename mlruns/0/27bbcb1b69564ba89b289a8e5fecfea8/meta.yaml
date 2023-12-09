@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/27bbcb1b69564ba89b289a8e5fecfea8/artifacts
+end_time: 1702148032501
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 27bbcb1b69564ba89b289a8e5fecfea8
+run_name: sassy-chimp-14
+run_uuid: 27bbcb1b69564ba89b289a8e5fecfea8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702148027120
+status: 3
+tags: []
+user_id: M Bial Badar

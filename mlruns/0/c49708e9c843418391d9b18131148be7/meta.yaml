@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/c49708e9c843418391d9b18131148be7/artifacts
+end_time: 1702148027073
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c49708e9c843418391d9b18131148be7
+run_name: calm-sheep-383
+run_uuid: c49708e9c843418391d9b18131148be7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702148021738
+status: 3
+tags: []
+user_id: M Bial Badar
