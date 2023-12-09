@@ -29,17 +29,26 @@ jobs:
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
 
+    - name: Pull data with DVC
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
+      run: |
+        dvc pull
+
     - name: Run data generation script
       run: |
         python append_data.py
       env:
         DATA_FILE_PATH: sensor_data.csv
 
-    - name: Set up DVC
-      run: |
-        pip install dvc
-
     - name: DVC Add and Commit
       run: |
         git add sensor_data.csv.dvc
         git commit -m "DVC commit for data file"
+
+    - uses: iterative/setup-dvc@v1
+    - name: Push data with DVC
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
+      run: |
+        dvc push
