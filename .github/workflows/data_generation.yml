@@ -1,8 +1,11 @@
 name: Data Generation
 
 on:
-  schedule:
-    - cron: '0 */12 * * *'  # Run every 12 hours
+  push:
+    branches:
+      - i200555
+  #schedule:
+  #  - cron: '0 */12 * * *'  # Run every 12 hours
 
 jobs:
   generate_data:
@@ -43,6 +46,23 @@ jobs:
         python preprocess.py
       env:
         DATA_FILE_PATH: sensor_data.csv
+
+    - name: Run Model On Test Data
+      run: |
+          python test.py
+      env:
+          DATA_FILE_PATH: sensor_data.csv
+
+    - name: Calculate and log metrics difference
+      run: |
+        OLD_METRICS='{}'
+        NEW_METRICS=$(cat metrics.json)
+        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = $OLD_METRICS; new_metrics = json.loads('$NEW_METRICS'); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
+        echo $METRICS_DIFFERENCE > metrics_difference.log
+        cat metrics_difference.log
+      env:
+        OLD_METRICS_FILE_PATH: metrics.json
+        NEW_METRICS_FILE_PATH: metrics.json
 
     - name: DVC Add and Commit
       run: |
