@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/bc2b441a42a3427c922995e600593427/artifacts
+end_time: 1702231243987
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: bc2b441a42a3427c922995e600593427
+run_name: awesome-gull-753
+run_uuid: bc2b441a42a3427c922995e600593427
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702231239811
+status: 3
+tags: []
+user_id: Saad

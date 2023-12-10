@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/3743ec56a53949af8491609bd6bd7f3a/artifacts
+end_time: 1702231227199
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3743ec56a53949af8491609bd6bd7f3a
+run_name: upset-stag-111
+run_uuid: 3743ec56a53949af8491609bd6bd7f3a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702231222892
+status: 3
+tags: []
+user_id: Saad

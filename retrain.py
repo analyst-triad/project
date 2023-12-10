@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import json
+import shutil
 
 # Load the model using MLflow
 shared_model_path = "best_model/"
@@ -20,7 +21,7 @@ y = data['Reading']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42, shuffle=False)
 
 # Check if metrics difference exceeds the threshold
-DIFF_THRESHOLD = 0.1
+DIFF_THRESHOLD = 0.001
 previous_metrics_file = 'current_metrics.json'
 current_metric_file = 'new_metrics.json'
 
@@ -53,11 +54,18 @@ if metrics_difference > DIFF_THRESHOLD:
     mse_dict = {'mse': mse}
     with open('current_metrics.json', 'w') as json_file:
         json.dump(mse_dict, json_file)
-else:
     
+    # Log the retrained model using MLflow
+    mlflow.sklearn.save_model(loaded_model, "new_model")
+    
+    # Source and destination paths
+    source_folder = "new_model/"
+    destination_folder = "best_model/"
+
+    # Copy the contents of the source folder to the destination folder
+    shutil.rmtree(destination_folder)  # Remove existing destination folder and its contents
+    shutil.copytree(source_folder, destination_folder)
+    shutil.rmtree(source_folder)
+    
+else:
     print("Metrics difference is within the threshold. No retraining needed.")
-
-
-
-
-

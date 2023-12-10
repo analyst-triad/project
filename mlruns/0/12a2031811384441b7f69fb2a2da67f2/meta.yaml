@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/12a2031811384441b7f69fb2a2da67f2/artifacts
+end_time: 1702231257336
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 12a2031811384441b7f69fb2a2da67f2
+run_name: clean-trout-209
+run_uuid: 12a2031811384441b7f69fb2a2da67f2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702231252626
+status: 3
+tags: []
+user_id: Saad

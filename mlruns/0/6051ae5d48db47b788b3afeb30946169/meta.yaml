@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/6051ae5d48db47b788b3afeb30946169/artifacts
+end_time: 1702231222879
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6051ae5d48db47b788b3afeb30946169
+run_name: nimble-cub-587
+run_uuid: 6051ae5d48db47b788b3afeb30946169
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702231195804
+status: 3
+tags: []
+user_id: Saad

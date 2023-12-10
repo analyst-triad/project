@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/11bc0d03f5e449e580bd77b873be1cf4/artifacts
+end_time: 1702231248242
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 11bc0d03f5e449e580bd77b873be1cf4
+run_name: indecisive-bear-400
+run_uuid: 11bc0d03f5e449e580bd77b873be1cf4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702231243987
+status: 3
+tags: []
+user_id: Saad
