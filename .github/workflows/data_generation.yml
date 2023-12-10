@@ -67,7 +67,7 @@ jobs:
         echo "$METRICS_DIFFERENCE" > metrics_difference.log
         cat metrics_difference.log
       env:
-        OLD_METRICS_FILE_PATH: $GITHUB_WORKSPACE/metrics.json
+        OLD_METRICS_FILE_PATH: current_metrics.json
         NEW_METRICS_FILE_PATH: new_metrics.json
 
     - name: DVC Add and Commit
