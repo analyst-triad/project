@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Saad/Downloads/MLOps%20Final%20Project/mlruns/0/5c6e106674fc46f2bcff2b88f4c465fa/artifacts
+end_time: 1702226883004
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5c6e106674fc46f2bcff2b88f4c465fa
+run_name: unleashed-gull-10
+run_uuid: 5c6e106674fc46f2bcff2b88f4c465fa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702226877641
+status: 3
+tags: []
+user_id: Saad
