@@ -53,6 +53,9 @@ jobs:
       env:
           DATA_FILE_PATH: sensor_data.csv
 
+    - name: Print Contents of First JSON File
+      run: metrics.json
+
     - name: Calculate and log metrics difference
       run: |
         OLD_METRICS='{}'
