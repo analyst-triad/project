@@ -44,4 +44,4 @@ for n_estimators in n_estimators_list:
             mlflow.log_metric("mse", mse)
 
             # Log the model
-            mlflow.sklearn.log_model(rf_model, "random_forest_model")
+            mlflow.sklearn.log_model(rf_model, "random_forest_model".format(n_estimators, max_depth))

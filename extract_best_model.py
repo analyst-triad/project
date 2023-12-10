@@ -1,23 +1,32 @@
-import mlflow
+import mlflow.sklearn
 from mlflow.tracking import MlflowClient
-from mlflow.exceptions import MlflowException
-import json
-import shutil
+from sklearn.metrics import mean_squared_error
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
 
-# Set the experiment name and model name
-experiment_name = "Default"  # Replace with your actual experiment name
-model_name = "production_model"  # Replace with your desired model name
+# Set MLflow tracking URI
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
-# Get the experiment ID
+# Load data
+data = pd.read_csv("preprocess_data.csv")
+
+# Define features (X) and target variable (y)
+X = data[['Hour', 'Machine_ID', 'Sensor_ID']]
+y = data['Reading']
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
+
+# Retrieve the best run using MLflow
 client = MlflowClient()
+experiment_name = "Default"  # Replace with your actual experiment name
 experiment = client.get_experiment_by_name(experiment_name)
 
 if experiment:
     experiment_id = experiment.experiment_id
 else:
     print(f"Experiment '{experiment_name}' not found.")
-    # Handle the case where the experiment doesn't exist or has no runs
-    # You might want to create the experiment or take appropriate action
     exit()
 
 # Search for runs in the experiment
@@ -38,21 +47,15 @@ if best_run is not None:
     print(f"Best Run ID: {best_run.info.run_id}")
     print(f"Best MSE: {best_mse}")
 
-    # Retrieve the best model URI
-    best_model_uri = best_run.info.artifact_uri + "/random_forest_model"
+    # Load the best model
+    best_model = mlflow.sklearn.load_model("runs:/" + best_run.info.run_id + "/random_forest_model")
 
-    try:
-        # Register the best model in the Model Registry
-        mlflow.register_model("runs:/" + best_run.info.run_id + "/random_forest_model", model_name)
-        print(f"Best model registered as '{model_name}' in the Model Registry.")
-    except MlflowException as e:
-        print(f"Error registering the best model: {e}")
+    # Register the best model in the Model Registry
+    mlflow.register_model("runs:/" + best_run.info.run_id + "/random_forest_model", "production_model")
+
+    # Save the loaded model to a file or deploy it as needed
+    # For example, if you want to save it as a .pkl file:
+    mlflow.sklearn.save_model(best_model, "best_model")
 
 else:
     print("No runs found in the experiment.")
-
-
-# Save the best model locally
-local_model_path = "best_model"
-mlflow.sklearn.save_model(best_run.info.artifact_uri + "/random_forest_model", local_model_path)
-

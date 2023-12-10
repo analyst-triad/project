@@ -18,6 +18,4 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 shared_model_path = "best_model/"
 loaded_model = mlflow.pyfunc.load_model(shared_model_path)
 
-# Make predictions
-predictions = loaded_model.predict(X_train)
-print(predictions)
+print(loaded_model.predict(X_train))
