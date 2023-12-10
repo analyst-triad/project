@@ -1,9 +1,6 @@
 name: Data Generation
 
 on:
-  push:
-    branches:
-      - i200555
   schedule:
     - cron: '0 */12 * * *'  # Run every 12 hours
 
