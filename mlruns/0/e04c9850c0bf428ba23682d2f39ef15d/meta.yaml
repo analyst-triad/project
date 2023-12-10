@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/e04c9850c0bf428ba23682d2f39ef15d/artifacts
+end_time: 1702201770228
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e04c9850c0bf428ba23682d2f39ef15d
+run_name: upset-hound-536
+run_uuid: e04c9850c0bf428ba23682d2f39ef15d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702201764642
+status: 3
+tags: []
+user_id: M Bial Badar

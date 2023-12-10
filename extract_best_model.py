@@ -1,6 +1,8 @@
 import mlflow
 from mlflow.tracking import MlflowClient
 from mlflow.exceptions import MlflowException
+import json
+import shutil
 
 # Set the experiment name and model name
 experiment_name = "Default"  # Replace with your actual experiment name
@@ -37,7 +39,7 @@ if best_run is not None:
     print(f"Best MSE: {best_mse}")
 
     # Retrieve the best model URI
-    best_model_uri = best_run.info.artifact_uri + "/random_forest_model_n*_*"
+    best_model_uri = best_run.info.artifact_uri + "/random_forest_model"
 
     try:
         # Register the best model in the Model Registry
@@ -48,3 +50,9 @@ if best_run is not None:
 
 else:
     print("No runs found in the experiment.")
+
+
+# Save the best model locally
+local_model_path = "best_model"
+mlflow.sklearn.save_model(best_run.info.artifact_uri + "/random_forest_model", local_model_path)
+
