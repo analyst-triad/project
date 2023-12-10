@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/a8c67ac3b1a945a889874dbfc8d901e9/artifacts
+end_time: 1702203381964
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a8c67ac3b1a945a889874dbfc8d901e9
+run_name: bedecked-slug-16
+run_uuid: a8c67ac3b1a945a889874dbfc8d901e9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702203375988
+status: 3
+tags: []
+user_id: M Bial Badar

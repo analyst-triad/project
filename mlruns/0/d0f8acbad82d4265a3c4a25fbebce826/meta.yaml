@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/d0f8acbad82d4265a3c4a25fbebce826/artifacts
+end_time: 1702205021336
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d0f8acbad82d4265a3c4a25fbebce826
+run_name: industrious-seal-523
+run_uuid: d0f8acbad82d4265a3c4a25fbebce826
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702205015632
+status: 3
+tags: []
+user_id: M Bial Badar

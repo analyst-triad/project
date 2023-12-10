@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/d93ee657ec6a482f9b23e7f56d18576c/artifacts
+end_time: 1702201758887
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d93ee657ec6a482f9b23e7f56d18576c
+run_name: placid-sponge-158
+run_uuid: d93ee657ec6a482f9b23e7f56d18576c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702201753326
+status: 3
+tags: []
+user_id: M Bial Badar

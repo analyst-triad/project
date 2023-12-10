@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/696d764f0d3841d99e3fbec924c1180e/artifacts
+end_time: 1702201782296
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 696d764f0d3841d99e3fbec924c1180e
+run_name: kindly-ant-863
+run_uuid: 696d764f0d3841d99e3fbec924c1180e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702201776439
+status: 3
+tags: []
+user_id: M Bial Badar

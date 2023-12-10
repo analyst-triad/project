@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/629a4e60014c4906870867e1634a9f68/artifacts
+end_time: 1702205026973
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 629a4e60014c4906870867e1634a9f68
+run_name: able-ant-304
+run_uuid: 629a4e60014c4906870867e1634a9f68
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702205021395
+status: 3
+tags: []
+user_id: M Bial Badar

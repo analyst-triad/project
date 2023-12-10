@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/506672218bac418e8acf434bf02cfd9c/artifacts
+end_time: 1702148064608
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 506672218bac418e8acf434bf02cfd9c
+run_name: invincible-snake-38
+run_uuid: 506672218bac418e8acf434bf02cfd9c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1702148056532
+status: 3
+tags: []
+user_id: M Bial Badar
