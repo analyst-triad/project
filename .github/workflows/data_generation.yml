@@ -4,93 +4,88 @@ on:
   push:
     branches:
       - i200555
-  #schedule:
-  #  - cron: '0 */12 * * *'  # Run every 12 hours
+  # schedule:
+  #   - cron: '0 */12 * * *'  # Run every 12 hours
 
 jobs:
   generate_data:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9  # Change to 3.9
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9  # Change to 3.9
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Set Git user information
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
+      - name: Set Git user information
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
-    - name: Pull data with DVC
-      env:
-        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
-      run: |
-        dvc pull
+      - name: Pull data with DVC
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
+        run: |
+          dvc pull
 
-    - name: Run data generation script
-      run: |
-        python append_data.py
-      env:
-        DATA_FILE_PATH: sensor_data.csv
+      - name: Run data generation script
+        run: |
+          python append_data.py
+        env:
+          DATA_FILE_PATH: sensor_data.csv
 
-    - name: Run data preprocessing Script
-      run: |
-        python preprocess.py
-      env:
-        DATA_FILE_PATH: sensor_data.csv
+      - name: Run data preprocessing Script
+        run: |
+          python preprocess.py
+        env:
+          DATA_FILE_PATH: sensor_data.csv
 
-    - name: Run Model On Test Data
-      run: |
+      - name: Run Model On Test Data
+        run: |
           python test.py new_metrics.json
-      env:
+        env:
           DATA_FILE_PATH: preprocess_data.csv
 
+      - name: Calculate and log metrics difference
+        run: |
+          OLD_METRICS=$(cat $OLD_METRICS_FILE_PATH)
+          NEW_METRICS=$(cat $NEW_METRICS_FILE_PATH)
+          METRICS_DIFFERENCE=$(python -c "import json; old_metrics = json.loads('''$OLD_METRICS'''); new_metrics = json.loads('''$NEW_METRICS'''); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
+          echo "$METRICS_DIFFERENCE" >> metrics_difference.log
+          cat metrics_difference.log
+        env:
+          OLD_METRICS_FILE_PATH: current_metrics.json
+          NEW_METRICS_FILE_PATH: new_metrics.json
 
-    - name: Print Files in $GITHUB_WORKSPACE
-      run: |
-          ls -R $GITHUB_WORKSPACE
+      - name: Check metrics difference
+        run: |
+          DIFF_THRESHOLD=0.3  
+          if (( $(echo "$METRICS_DIFFERENCE > $DIFF_THRESHOLD" | bc -l) )); then
+            echo "Metrics difference exceeds the threshold. Retraining needed."
+            python retrain.py
+          else
+            echo "Metrics difference is within the threshold. No retraining needed."
+          fi
 
-    - name: Calculate and log metrics difference
-      run: |
-        OLD_METRICS=$(cat $OLD_METRICS_FILE_PATH)
-        NEW_METRICS=$(cat $NEW_METRICS_FILE_PATH)
-        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = json.loads('''$OLD_METRICS'''); new_metrics = json.loads('''$NEW_METRICS'''); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
-        echo "$METRICS_DIFFERENCE" >> metrics_difference.log
-        cat metrics_difference.log
-      env:
-        OLD_METRICS_FILE_PATH: current_metrics.json
-        NEW_METRICS_FILE_PATH: new_metrics.json
+      - name: DVC Add and Commit
+        run: |
+          git add . 
+          git commit -m "DVC commit for data file"
 
+      - uses: iterative/setup-dvc@v1
 
-    - name: Check metrics difference and trigger retraining if needed
-      run: |
-        DIFF_THRESHOLD=0.3  
-        if (( $(echo "$METRICS_DIFFERENCE > $DIFF_THRESHOLD" | bc -l) )); then
-          echo "Metrics difference exceeds the threshold. Retraining needed."
-          python retrain.py
-        else
-          echo "Metrics difference is within the threshold. No retraining needed."
-        fi
-
-    - name: DVC Add and Commit
-      run: |
-        git add . 
-        git commit -m "DVC commit for data file"
-
-    - uses: iterative/setup-dvc@v1
-    - name: Push data with DVC
-      env:
-        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
-      run: |
-        dvc add sensor_data.csv
-        dvc add preprocess_data.csv
-        git push
-        dvc push
+      - name: Push data with DVC
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
+        run: |
+          dvc add sensor_data.csv
+          dvc add preprocess_data.csv
+          git push
+          dvc push
