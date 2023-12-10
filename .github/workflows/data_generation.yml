@@ -50,22 +50,20 @@ jobs:
     - name: Run Model On Test Data
       run: |
           python test.py
+          mv metrics.json new_metrics.json
       env:
-          DATA_FILE_PATH: sensor_data.csv
-
-    - name: Print Contents of First JSON File
-      run: cat metrics.json
+          DATA_FILE_PATH: preprocess_data.csv
 
     - name: Calculate and log metrics difference
       run: |
-        OLD_METRICS='{}'
-        NEW_METRICS=$(cat metrics.json)
-        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = $OLD_METRICS; new_metrics = json.loads('''$NEW_METRICS'''); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
+        OLD_METRICS=$(cat $OLD_METRICS_FILE_PATH)
+        NEW_METRICS=$(cat $NEW_METRICS_FILE_PATH)
+        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = json.loads('''$OLD_METRICS'''); new_metrics = json.loads('''$NEW_METRICS'''); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
         echo "$METRICS_DIFFERENCE" > metrics_difference.log
         cat metrics_difference.log
       env:
         OLD_METRICS_FILE_PATH: metrics.json
-        NEW_METRICS_FILE_PATH: metrics.json
+        NEW_METRICS_FILE_PATH: new_metrics.json
 
     - name: DVC Add and Commit
       run: |
