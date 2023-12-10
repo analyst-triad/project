@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
+import json
 
 # Load data
 data = pd.read_csv("preprocess_data.csv")
@@ -18,4 +19,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 shared_model_path = "best_model/"
 loaded_model = mlflow.pyfunc.load_model(shared_model_path)
 
-print(loaded_model.predict(X_train))
+# Calculate Mean Squared Error
+y_pred = loaded_model.predict(X)
+mse = mean_squared_error(y, y_pred)
+print(f'Mean Squared Error: {mse}')
+
+# Log MSE to a JSON file
+mse_dict = {'mse': mse}
+with open('metrics.json', 'w') as json_file:
+    json.dump(mse_dict, json_file)
