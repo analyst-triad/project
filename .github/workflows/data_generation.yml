@@ -58,19 +58,9 @@ jobs:
         OLD_METRICS_FILE_PATH: current_metrics.json
         NEW_METRICS_FILE_PATH: new_metrics.json
 
-    - name: Check metrics difference and trigger retraining if needed
+    - name: Check metrics difference and retrain if needed
       run: |
-        DIFF_THRESHOLD=0.3
-        
-        # Convert METRICS_DIFFERENCE to a valid floating-point number
-        METRICS_DIFFERENCE_FLOAT=$(echo "$METRICS_DIFFERENCE" | tr -d '[:space:]')
-        
-        if (( $(echo "$METRICS_DIFFERENCE_FLOAT > $DIFF_THRESHOLD" | bc -l) )); then
-          echo "Metrics difference exceeds the threshold. Retraining needed."
-          python retrain.py
-        else
-          echo "Metrics difference is within the threshold. No retraining needed."
-        fi
+        python retrain.py
 
     - name: DVC Add and Commit
       run: |
