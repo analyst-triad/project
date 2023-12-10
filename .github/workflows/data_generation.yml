@@ -54,7 +54,7 @@ jobs:
           DATA_FILE_PATH: sensor_data.csv
 
     - name: Print Contents of First JSON File
-      run: metrics.json
+      run: cat metrics.json
 
     - name: Calculate and log metrics difference
       run: |
