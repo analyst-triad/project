@@ -37,7 +37,13 @@ jobs:
         python append_data.py
       env:
         DATA_FILE_PATH: sensor_data.csv
-#Fixed some bugs
+
+    - name: Run data preprocessing Script
+      run: |
+        python preprocess.py
+      env:
+        DATA_FILE_PATH: sensor_data.csv
+
     - name: DVC Add and Commit
       run: |
         git add . 
@@ -49,7 +55,6 @@ jobs:
         GDRIVE_CREDENTIALS_DATA: ${{ secrets.GOOGLE_DRIVE }}
       run: |
         dvc add sensor_data.csv
-        git add .
-        git commit -m "DVC commit for data file"
+        dvc add preprocess_data.csv
         git push
         dvc push
