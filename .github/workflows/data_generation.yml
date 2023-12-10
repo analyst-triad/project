@@ -81,5 +81,8 @@ jobs:
       run: |
         dvc add sensor_data.csv
         dvc add preprocess_data.csv
+        git add sensor_data.csv.dvc
+        git add preprocess_data.csv
+        git commit -m "DVC commit for data file"
         git push
         dvc push
