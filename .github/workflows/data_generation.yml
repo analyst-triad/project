@@ -54,6 +54,11 @@ jobs:
       env:
           DATA_FILE_PATH: preprocess_data.csv
 
+
+    - name: Print Files in $GITHUB_WORKSPACE
+      run: |
+          ls -R $GITHUB_WORKSPACE
+
     - name: Calculate and log metrics difference
       run: |
         OLD_METRICS=$(cat $OLD_METRICS_FILE_PATH)
