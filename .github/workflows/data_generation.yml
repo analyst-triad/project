@@ -57,8 +57,8 @@ jobs:
       run: |
         OLD_METRICS='{}'
         NEW_METRICS=$(cat metrics.json)
-        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = $OLD_METRICS; new_metrics = json.loads('$NEW_METRICS'); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
-        echo $METRICS_DIFFERENCE > metrics_difference.log
+        METRICS_DIFFERENCE=$(python -c "import json; old_metrics = $OLD_METRICS; new_metrics = json.loads('''$NEW_METRICS'''); metrics_difference = {key: new_metrics[key] - old_metrics.get(key, 0) for key in new_metrics}; print(json.dumps(metrics_difference))")
+        echo "$METRICS_DIFFERENCE" > metrics_difference.log
         cat metrics_difference.log
       env:
         OLD_METRICS_FILE_PATH: metrics.json
