@@ -5,7 +5,7 @@ on:
   #  branches:
   #    - main
   schedule:
-    - cron: '*/1 * * * *'  # Run every 12 hours, change to one minute for testing
+    - cron: '* * * * *'  # Run every 12 hours, change to one minute for testing
 
 jobs:
   generate_data:
