@@ -40,7 +40,7 @@ try:
 except (FileNotFoundError, json.JSONDecodeError):
     current_mse = 0
 
-metrics_difference = abs(current_mse - previous_mse)
+metrics_difference = current_mse - previous_mse
 
 if metrics_difference > DIFF_THRESHOLD:
     print("Metrics difference exceeds the threshold. Retraining needed.")
