@@ -1,11 +1,9 @@
 name: Data Generation
 
 on:
-  #push:
-  #  branches:
-  #    - main
-  schedule:
-    - cron: '* * * * *'  # Run every 12 hours, change to one minute for testing
+  push:
+    branches:
+      - main
 
 jobs:
   generate_data:
